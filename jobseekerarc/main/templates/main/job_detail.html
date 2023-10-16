@@ -1,0 +1,36 @@
+{% extends 'main/base.html' %}
+{% block title %}Home Page{% endblock %}
+{% block content %}
+<div class="card mt-2">
+    <div class="card-header"><strong>@{{ job.author.username }}</strong></div>
+    <div class="card-body d-flex flex-row justify-content-between">
+        <div>
+            <h5 class="card-title">{{ job.title }}</h5>
+            <p>{{ job.description }}</p>
+        </div>
+    </div>
+    <div class="card-footer text-muted">
+        {{ job.created_at}}
+    </div>
+</div>
+<div>
+    {% if job_application_exists %}
+        {% if job_application.application_status == 'status_pending' %}
+        <strong style="color: gray">Application Sent</strong>
+        {% elif job_application.application_status == 'accepted' %}
+        <strong style="color: green">Application Accepted</strong>
+        {% elif job_application.application_status == 'rejected' %}
+        <strong style="color: red">Application Rejected</strong>
+        {% endif %}
+    {% else %}
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="resume">Upload Resume</label><br>
+                <input type="file" name="resume" id="resume" accept="application/pdf,application/vnd.ms-excel" required/>
+            </div>
+            <button type="submit" class="btn btn-success">Apply</button>
+        </form>
+    {% endif %}
+</div>
+{% endblock %}

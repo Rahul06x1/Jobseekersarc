@@ -1,0 +1,29 @@
+{% extends 'main/jobrecruiter_base.html' %}
+{% block title %}Home Page{% endblock %}
+{% block content %}
+{% for job in jobs %}
+<div class="card mt-2">
+    <div class="card-header"><strong>@{{ job.author.username }}</strong></div>
+    <div class="card-body d-flex flex-row justify-content-between">
+        <div>
+            <h5 class="card-title">{{ job.title }}</h5>
+            <p>{{ job.description }}</p>
+        </div>
+        <div>
+            {% if user == job.author %}
+            <form method="post">
+                {% csrf_token %}
+<!--                <button type="submit" class="btn btn-danger" name="delete-job" value="{{ job.id }}">DELETE</button>-->
+                <button type="submit" class="btn btn-danger" name="job-id" value="{{ job.id }}">DELETE</button>
+            </form>
+            {% endif %}
+        </div>
+    </div>
+    <div class="card-footer text-muted">
+        {{ job.created_at}}
+    </div>
+</div>
+{% empty %}
+<p>No jobs posted yet...</p>
+{% endfor %}
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends 'registration/login_base.html' %}
+{% block title %}Sign Up{% endblock %}
+{% block content %}
+<form method="post">
+    {% csrf_token %}
+        <div class="form-group">
+            <label for="company_name">Company Name</label>
+            <input type="text" class="form-control" name="company_name" id="company_name"
+                   placeholder="Enter Company Name" required>
+        </div>
+        <div class="form-group">
+            <label for="exampleInputEmail1">Email address</label>
+            <input type="email" class="form-control" name="email" id="exampleInputEmail1" aria-describedby="emailHelp"
+                   placeholder="Enter email" required>
+            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Password</label>
+            <input type="password" class="form-control" name="password1" id="exampleInputPassword1" placeholder="Password" required>
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword2">Reenter Password</label>
+            <input type="password" class="form-control" name="password2" id="exampleInputPassword2" placeholder="Reenter Password" required>
+        </div>
+    <p>Have an account?Login <a href="/jobrecruiter-login">here</a></p>
+    <button type="submit" class="btn btn-success">Register</button>
+</form>
+{% endblock %}
